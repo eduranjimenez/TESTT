@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Institution extends Model
+class StudentCommission extends Model
 {
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'type', 'phone', 'city'
+        'institutioncommission_id', 'student_id', 'country_id'
     ];
 }
