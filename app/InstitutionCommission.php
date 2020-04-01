@@ -12,16 +12,32 @@ class InstitutionCommission extends Model
      * @var array
      */
     protected $fillable = [
-        'capacity', 'commission_id', 'countries'
+        'commission_id', 'institution_id'
     ];
 
-     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'countries' => 'array',
-    ];
+    public function institution()
+    {
+        return $this->belongsTo('App\Institution');
+    }
+
+    public function commission()
+    {
+        return $this->belongsTo('App\Commission');
+    }
+
+    public function commissionrepresentations()
+    {
+        return $this->hasMany('App\CommissionRepresentation','institutioncommission_id');
+    }
+
+    public function getCommisionName()
+    {
+        return $this->commission->name;
+    }
+
+    public function getCommissionLang()
+    {
+        return $this->commission->language->name;
+    }
 
 }

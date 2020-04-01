@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Institution;
 use Illuminate\Http\Request;
-
+use App\Repositories\Contracts\InstitutionInterface;
+use App\Http\Requests\InstitutionPost;
+use App\Participant;
+use App\Commission;
+use App\Http\Requests\InstitutionCommission;
 class InstitutionController extends Controller
 {
+    protected $repo;
+
+    public function __construct(InstitutionInterface $repo)
+    {
+        $this->repo = $repo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,7 @@ class InstitutionController extends Controller
      */
     public function index()
     {
-        //
+        return $this->repo->index();
     }
 
     /**
@@ -24,7 +34,7 @@ class InstitutionController extends Controller
      */
     public function create()
     {
-        //
+        return $this->repo->create();
     }
 
     /**
@@ -33,9 +43,9 @@ class InstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InstitutionPost $request)
     {
-        //
+        return $this->repo->store($request);
     }
 
     /**
@@ -46,7 +56,7 @@ class InstitutionController extends Controller
      */
     public function show(Institution $institution)
     {
-        //
+        return $this->repo->show($institution);
     }
 
     /**
@@ -57,7 +67,22 @@ class InstitutionController extends Controller
      */
     public function edit(Institution $institution)
     {
-        //
+        return $this->repo->edit($institution);
+    }
+
+    /**
+    * Show the form for assign a commission.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function assign()
+    {
+        return $this->repo->assign();
+    }
+
+    public function assignStore(InstitutionCommission $request)
+    {
+        return $this->repo->assignStore($request);
     }
 
     /**
@@ -67,9 +92,9 @@ class InstitutionController extends Controller
      * @param  \App\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institution $institution)
+    public function update(InstitutionPost $request, Institution $institution)
     {
-        //
+        return $this->repo->update($request, $institution);
     }
 
     /**
@@ -80,6 +105,43 @@ class InstitutionController extends Controller
      */
     public function destroy(Institution $institution)
     {
-        //
+        return $this->repo->delete($institution);
+    }
+
+    public function getCommissionRepresentations($institutioncommission)
+    {
+        return $this->repo->getCommissionRepresentations($institutioncommission);
+    }
+
+    public function importInstitutions(Request $request)
+    {
+        return $this->repo->importInstitutions($request);
+    }
+    
+    public function participantsExcel(Institution $institution)
+    {
+        return $this->repo->participantsExcel($institution);
+    }
+
+    public function participantByCommission($commission)
+    {
+        return $this->repo->commissionsReport($commission);
+    }
+
+    public function reports()
+    {
+        $institutions = Institution::orderby('name')->get();
+        return view('reports.institutions', compact('institutions'));
+    }
+
+    public function commissionsReport()
+    {
+        $commissions = Commission::orderby('name')->get();
+        return view('reports.commissions', compact('commissions'));
+    }
+
+    public function generalReport()
+    {
+        return $this->repo->generalReport();
     }
 }

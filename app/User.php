@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'lastname'
+        'name', 'email', 'password', 'role', 'lastname', 'phone', 'institution_id'
     ];
 
     /**
@@ -27,4 +27,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function institution()
+    {
+        return $this->belongsTo('App\Institution');
+    }
+
+    public function isAdmin()
+    {
+        if($this->role === \App\Enums\Roles::ISADMIN) {
+            return true;
+        }
+    }
+
+    public function getRole()
+    {
+        if($this->role === 1) {
+            return 'Administrador';
+        }
+        return 'Encargado';
+    }
 }

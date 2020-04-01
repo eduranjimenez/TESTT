@@ -36,7 +36,7 @@ return array(
          * Courier, Courier-Bold, Courier-BoldOblique, Courier-Oblique,
          * Helvetica, Helvetica-Bold, Helvetica-BoldOblique, Helvetica-Oblique,
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
-         * Symbol, ZapfDingbats, FuturaStd-Light.
+         * Symbol, ZapfDingbats.
          */
         "font_dir" => storage_path('fonts/'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
 
@@ -149,7 +149,7 @@ return array(
          * Used if no suitable fonts can be found. This must exist in the font folder.
          * @var string
          */
-        "default_font" => "FuturaStd",
+        "default_font" => "serif",
 
         /**
          * Image DPI setting

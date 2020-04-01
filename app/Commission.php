@@ -12,6 +12,21 @@ class Commission extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'language_id'
     ];
+
+    public function institutioncommissions()
+    {
+        return $this->hasMany('App\InstitutionCommission');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo('App\Language');
+    }
+
+    public function getLanguage()
+    {
+        return $this->language->name;
+    }
 }

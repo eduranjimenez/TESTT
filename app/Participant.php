@@ -116,15 +116,6 @@ class Participant extends Model implements HasMedia
         }
     }
 
-    public function getPassportFile()
-    {
-        if ($this->getMedia('passport')->first()) {
-            return $this->getMedia('passport')->first()->getFullUrl();
-        } else {
-            return '#';
-        }
-    }
-    
     public function getConductFile()
     {
         if ($this->getMedia('conduct_codes')->first()) {
@@ -154,12 +145,11 @@ class Participant extends Model implements HasMedia
 
     public function countMedia()
     {
-        $passport = $this->getMedia('passport')->count();
         $photo = $this->getMedia('photos')->count();
         $conducCode = $this->getMedia('conduct_codes')->count();
         $firstPayment = $this->getMedia('first_payments')->count();
         $lastPayment = $this->getMedia('last_payments')->count();
 
-        return $count = $photo +  $passport + $conducCode + $firstPayment + $lastPayment;
+        return $count = $photo + $conducCode + $firstPayment + $lastPayment;
     }
 }

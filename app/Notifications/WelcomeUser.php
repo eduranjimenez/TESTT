@@ -43,7 +43,7 @@ class WelcomeUser extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->from('no-reply@unadr.org.do', 'NYMUNLAC 2019')
+                    ->from('no-reply@unadr.org.do', 'CILA')
                     ->subject('¡Bienvenido/a al Sistema de Gestión de Conferencias de la ANU-RD!')
                     ->line('¡Bienvenido/a al Sistema de Gestión de Conferencias de la ANU-RD!')
                     ->line('Favor hacer clic en el botón debajo para iniciar el registro de los participantes.')

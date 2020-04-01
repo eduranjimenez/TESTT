@@ -16,8 +16,13 @@ class CreateCommissionsTable extends Migration
         Schema::create('commissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('language_id')->unsigned();
             $table->string('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('language_id')
+                ->references('id')->on('languages')
+                ->onDelete('cascade');
         });
     }
 

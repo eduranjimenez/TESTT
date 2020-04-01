@@ -46,12 +46,7 @@ class ParticipantRepo implements ParticipantInterface
     public function store($request)
     {
         $participant = Participant::create($request->all());
-        
-        if ($request->has('passport')) {
-            $participant->addMedia($request->passport)
-                ->toMediaCollection('passport');
-        }
-        
+
         if ($request->has('photo')) {
             $participant->addMedia($request->photo)
                 ->toMediaCollection('photos');
@@ -108,13 +103,7 @@ class ParticipantRepo implements ParticipantInterface
     public function update($request, $participant)
     {
         $participant->update($request->all());
-        
-        if ($request->has('passport')) {
-            $participant->clearMediaCollection('passport');
-            $participant->addMedia($request->passport)
-                ->toMediaCollection('passport');
-        }
-        
+
         if ($request->has('photo')) {
             $participant->clearMediaCollection('photos');
             $participant->addMedia($request->photo)

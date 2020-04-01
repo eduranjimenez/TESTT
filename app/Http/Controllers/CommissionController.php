@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Commission;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommissionPost;
+use App\Repositories\Contracts\CommissionInterface;
+use App\Language;
 
 class CommissionController extends Controller
 {
+    protected $repo;
+
+    public function __construct(CommissionInterface $repo)
+    {
+        $this->repo = $repo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,7 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        //
+        return $this->repo->index();
     }
 
     /**
@@ -24,7 +33,8 @@ class CommissionController extends Controller
      */
     public function create()
     {
-        //
+        $languages = Language::all();
+        return view('commissions.create', compact('languages'));
     }
 
     /**
@@ -33,9 +43,9 @@ class CommissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommissionPost $request)
     {
-        //
+        return $this->repo->store($request);
     }
 
     /**
@@ -46,7 +56,7 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        //
+        return view('commissions.show', compact('commission'));
     }
 
     /**
@@ -57,7 +67,8 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        //
+        $languages = Language::all();
+        return view('commissions.edit', compact('commission', 'languages'));
     }
 
     /**
@@ -67,9 +78,9 @@ class CommissionController extends Controller
      * @param  \App\Commission  $commission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commission $commission)
+    public function update(CommissionPost $request, Commission $commission)
     {
-        //
+        return $this->repo->update($request, $commission);
     }
 
     /**
@@ -80,6 +91,11 @@ class CommissionController extends Controller
      */
     public function destroy(Commission $commission)
     {
-        //
+        return $this->repo->delete($commission);
+    }
+
+    public function importCommissions(Request $request)
+    {
+        return $this->repo->importCommissions($request);
     }
 }

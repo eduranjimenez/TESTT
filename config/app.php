@@ -159,6 +159,15 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Repositories\Providers\InstitutionProvider::class,
+        App\Repositories\Providers\CommissionProvider::class,
+        App\Repositories\Providers\ParticipantProvider::class,
+        App\Repositories\Providers\UserProvider::class,
+        App\Repositories\Providers\RepresentationProvider::class,
+        App\Repositories\Providers\PdfProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -208,6 +217,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
